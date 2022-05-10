@@ -18,17 +18,17 @@
 
 // console.log(phoneInput);
 // console.log(phoneClick);
-// const phoneReg = /^\+996 \d{3} \d{2}-\d{2}-\d{2}$/
+const phoneReg = /^\+996 \d{3} \d{2}-\d{2}-\d{2}$/
 
-// phoneClick.addEventListener("click", () => {
-//   if(phoneReg.test(phoneInput.value)){
-//     phoneResult.innerText = "ok";
-//     phoneResult.style.color = "green";
-//   }else {
-//     phoneResult.innerText = " not ok";
-//     phoneResult.style.color = "red";
-//   }
-// });
+phoneClick.addEventListener("click", () => {
+  if(phoneReg.test(phoneInput.value)){
+    phoneResult.innerText = "ok";
+    phoneResult.style.color = "green";
+  }else {
+    phoneResult.innerText = " not ok";
+    phoneResult.style.color = "red";
+  }
+});
 
 // const letter = "122121212123213";
 
