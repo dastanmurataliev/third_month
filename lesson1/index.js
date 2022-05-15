@@ -18,17 +18,17 @@
 
 // console.log(phoneInput);
 // console.log(phoneClick);
-const phoneReg = /^\+996 \d{3} \d{2}-\d{2}-\d{2}$/
+// const phoneReg = /^\+996 \d{3} \d{2}-\d{2}-\d{2}$/
 
-phoneClick.addEventListener("click", () => {
-  if(phoneReg.test(phoneInput.value)){
-    phoneResult.innerText = "ok";
-    phoneResult.style.color = "green";
-  }else {
-    phoneResult.innerText = " not ok";
-    phoneResult.style.color = "red";
-  }
-});
+// phoneClick.addEventListener("click", () => {
+//   if(phoneReg.test(phoneInput.value)){
+//     phoneResult.innerText = "ok";
+//     phoneResult.style.color = "green";
+//   }else {
+//     phoneResult.innerText = " not ok";
+//     phoneResult.style.color = "red";
+//   }
+// });
 
 // const letter = "122121212123213";
 
@@ -56,35 +56,35 @@ phoneClick.addEventListener("click", () => {
 
 // count()
 
-const people = { 
-  John: { 
-    age: 25, 
-    parents: { 
-      Kelly: { 
-        age: 45, 
-      }, 
-      Tony: { 
-        age: 45, 
-      }, 
-    }, 
-  }, 
-  Sam: { 
-    age: 15, 
-    parents: { 
-      Jean: { 
-        age: 35, 
-      }, 
-    }, 
-  }, 
-};
+// const people = { 
+//   John: { 
+//     age: 25, 
+//     parents: { 
+//       Kelly: { 
+//         age: 45, 
+//       }, 
+//       Tony: { 
+//         age: 45, 
+//       }, 
+//     }, 
+//   }, 
+//   Sam: { 
+//     age: 15, 
+//     parents: { 
+//       Jean: { 
+//         age: 35, 
+//       }, 
+//     }, 
+//   }, 
+// };
 
-const parentsList = (obj) => {
-  if(obj.parents) {
-    for (let key in obj.parents) {
-      console.log(key)
-      parentsList(obj.parents[key]);
-    }
-  }
-}
+// const parentsList = (obj) => {
+//   if(obj.parents) {
+//     for (let key in obj.parents) {
+//       console.log(key)
+//       parentsList(obj.parents[key]);
+//     }
+//   }
+// }
 
-parentsList(people.John)
+// parentsList(people.John)
