@@ -32,30 +32,38 @@ tabsParent.addEventListener("click", (event) => {
   }
 });
 
-let slideIndex = 1;
-showSlides(slideIndex);
+let slideIndex = 0;
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
 
-function showSlides(n) {
+function showSlides (n) {
     let slides = document.querySelectorAll(".tabheader__item");
     let sliderSlide = document.querySelectorAll(".tabcontent");
     if (n > slides.length && n > sliderSlide.length) {
-      slideIndex = 1;
+      slideIndex += 1;
     }
-    if (n < 1) {
+    if (n < 0) {
         slideIndex = slides.length && slideIndex == sliderSlide.length;
     }
     for (let slide of slides) {
-      
+      slide.classList.remove("tabheader__item_active");
     }
+    slides[n].classList.add("tabheader__item_active");
     
     for (let slide of sliderSlide) {
         slide.style.display = "none";
     }
-    sliderSlide[slideIndex - 1].style.display = "block";
+    sliderSlide[slideIndex].style.display = "block";
+  
 }
 
 let timer = setInterval(function(){
-    slideIndex++;
+    slideIndex++; {
+      if (slideIndex >=4) {
+        slideIndex = 0
+      }
+    }
     showSlides(slideIndex);
   },5000);
 
