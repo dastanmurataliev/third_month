@@ -1,4 +1,3 @@
-
 const tabs = document.querySelectorAll(".tabheader__item");
 const tabsParent = document.querySelector(".tabheader__items");
 const tabContent = document.querySelectorAll(".tabcontent");
@@ -16,7 +15,6 @@ const showTabContent = (i = 0) => {
   tabContent[i].style.display = "block";
   tabs[i].classList.add("tabheader__item_active");
 };
-
 hideTabContent();
 showTabContent();
 
@@ -26,6 +24,7 @@ tabsParent.addEventListener("click", (event) => {
   if (target.classList.contains("tabheader__item")) {
     tabs.forEach((item, i) => {
       if (target === item) {
+        console.log(i);
         hideTabContent();
         showTabContent(i);
       }
@@ -36,10 +35,6 @@ tabsParent.addEventListener("click", (event) => {
 let slideIndex = 1;
 showSlides(slideIndex);
 
-function currentSlide(n) {
-  showSlides(slideIndex = n);
-}
-
 function showSlides(n) {
     let slides = document.querySelectorAll(".tabheader__item");
     let sliderSlide = document.querySelectorAll(".tabcontent");
@@ -49,11 +44,10 @@ function showSlides(n) {
     if (n < 1) {
         slideIndex = slides.length && slideIndex == sliderSlide.length;
     }
-
     for (let slide of slides) {
-        slide.style.display = "none";
+      
     }
-    slides[slideIndex - 1].style.display = "block";
+    
     for (let slide of sliderSlide) {
         slide.style.display = "none";
     }
@@ -65,13 +59,11 @@ let timer = setInterval(function(){
     showSlides(slideIndex);
   },5000);
 
+
+
 const modal = document.querySelector(".modal");
 const modalTrigger = document.querySelector(".btn_white");
 const closeModalBtn = document.querySelector(".modal__close");
-
-// console.log(modal, "modal");
-// console.log(modalTrigger, " modalTrigger");
-// console.log(closeModalBtn, " closeModalBtn");
 
 const openModal = () => {
   modal.classList.add("show");
@@ -90,17 +82,9 @@ modalTrigger.addEventListener("click", openModal);
 modal.addEventListener("click", (event) => {
   if (event.target == modal) {
     closeModal();
+    console.log(event.target);
   }
 });
 
 closeModalBtn.addEventListener("click", closeModal);
 
-// window.onscroll = (function() {
-
-// 	let target = this.scrollTop();
-// 	if(target == 0) {
-    
-// 	} else {
-// 		openModal()
-// 	}
-// });
