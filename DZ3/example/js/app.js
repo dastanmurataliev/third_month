@@ -59,15 +59,14 @@ function showSlides (n) {
 }
 
 let timer = setInterval(function(){
-    slideIndex++; {
-      if (slideIndex >=4) {
+     { if (slideIndex >=4) {
         slideIndex = 0
+      } else {
+        slideIndex++;
       }
     }
     showSlides(slideIndex);
   },5000);
-
-
 
 const modal = document.querySelector(".modal");
 const modalTrigger = document.querySelector(".btn_white");
@@ -96,3 +95,9 @@ modal.addEventListener("click", (event) => {
 
 closeModalBtn.addEventListener("click", closeModal);
 
+window.addEventListener("scroll", () => { 
+  console.log(window.pageYOffset)
+  if (window.pageYOffset > 3745) {
+    openModal()
+  }
+});
