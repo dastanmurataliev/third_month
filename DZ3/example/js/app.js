@@ -102,8 +102,8 @@ closeModalBtn.addEventListener("click", closeModal);
 // }
 
 window.addEventListener("scroll", () => {
-  console.log(window.pageYOffset)
-  if (window.pageYOffset > 3745) {
+  let num = (window.pageYOffset)
+  if ( window.pageYOffset > 3605) {
     openModal()
-  }
-});
+  }}
+);
