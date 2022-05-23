@@ -70,6 +70,7 @@ let timer = setInterval(function () {
 
 const modal = document.querySelector(".modal");
 const modalTrigger = document.querySelector(".btn_white");
+const modalTriggerDark = document.querySelector(".btn_dark")
 const closeModalBtn = document.querySelector(".modal__close");
 
 const openModal = () => {
@@ -85,6 +86,7 @@ const closeModal = () => {
 };
 
 modalTrigger.addEventListener("click", openModal);
+modalTriggerDark.addEventListener("click", openModal);
 
 modal.addEventListener("click", (event) => {
   if (event.target == modal) {
@@ -118,7 +120,7 @@ function openModalScroll() {
 	}
 }
 
-const deadline = '2022-12-25'
+const deadline = '2022-5-26'
 
 function getTimeRemaining(deadline) {
 	const t = new Date(deadline) - new Date(),
