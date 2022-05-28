@@ -1,46 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <style>
-    body {
-      font-family: cursive, 'Courier New', Courier, monospace;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Document</title>
+	</head>
+	<style>
+		.wrapper{
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 100vh;
+			flex-direction: column;
+		}
+		.som label{
+			color: red;
+			font-weight: 500;
+			font-size: 20px;
+		}
+		.euro label {
+			color: red;
+			font-weight: 500;
+			font-size: 20px;
+		}
+		.som input{
+			border-radius: 10px;
+			width: 200px;
+			height: 20px;
+			color: green;
+			font-size: 18px;
+			font-weight: 400;
+		}
+		.euro input {
+			border-radius: 10px;
+			width: 200px;
+			height: 20px;
+			font-size: 18px;
+			font-weight: 400;
+		}
+    .euro {
+      margin: 20px;
     }
-    .som {
-      display: flex;
-      flex-direction: column;
+    .usd label {
+      color: red;
+			font-weight: 500;
+			font-size: 20px;
     }
-    .usd {
-      display: flex;
-      flex-direction: column;
-      margin-top: 50px;
+    .usd input {
+      border-radius: 10px;
+			width: 200px;
+			height: 20px;
+			font-size: 18px;
+			font-weight: 400;
     }
-    input {
-      padding: 10px 20px;
-    }
-    label {
-      font-size: 20px;
-    }
-  </style>
-</head>
-<body>
-  <div class="wrapper">
-    <div class="som">
-      <label for="som">Som</label>
-      <input type="number" id="som">
-    </div>
-    <div class="usd">
-      <label for="som">Dollar</label>
-      <input type="number" id="usd">
-    </div>
-  </div>
-</body>
-<script src="app.js"></script>
+	</style>
+	<body>
+		<div class="wrapper">
+			<div class="som">
+				<label for="som">SOM</label>
+				<input type="number" id="som">
+			</div>
+			<div class="euro">
+				<label for="euro">EURO</label>
+				<input type="number" id="euro">
+			</div>
+			<div class="usd">
+				<label for="usd">USD</label>
+				<input type="number" id="usd">
+			</div>
+		</div>
+	</body>
+	<script src="app.js"></script>
 </html>

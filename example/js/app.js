@@ -120,7 +120,7 @@ function openModalScroll() {
 	}
 }
 
-const deadline = '2022-5-26'
+const deadline = '2022-5-27'
 
 function getTimeRemaining(deadline) {
 	const t = new Date(deadline) - new Date(),
@@ -171,7 +171,6 @@ setClock('.timer', deadline)
 
 // card
 
-
 class Menu {
 	constructor(src, title, description, price) {
 		this.src = src
@@ -210,6 +209,7 @@ const card1 = new Menu(
 card1.render()
 
 // form
+
 const forms = document.querySelectorAll('form')
 const message = {
 	loading: 'Идет загрузка...',
@@ -229,28 +229,43 @@ function postData (form) {
 		messageBlock.textContent = message.loading
 		form.append(messageBlock)
 
-		const request = new XMLHttpRequest()
-		request.open('POST', 'server.php')
-		request.setRequestHeader('Content-type', 'application/json')
+		// const request = new XMLHttpRequest()
+		// request.open('POST', 'server.php')
+		// request.setRequestHeader('Content-type', 'application/json')
 
-		const formData = new FormData(form)
-		const object = {}
+		// const formData = new FormData(form)
+		// const object = {}
 
-		formData.forEach((item, i) => {
-			object[i] = item
-		})
+		// formData.forEach((item, i) => {
+		// 	object[i] = item
+		// })
 
-		const json = JSON.stringify(object)
+		// const json = JSON.stringify(object)
+		// request.send(json)
 
-		request.send(json)
-
-		request.addEventListener('load', () => {
-			if(request.status === 200){
-				console.log(request.response)
-				messageBlock.textContent = message.success
-			} else {
-				messageBlock.textContent = message.fail
-			}
-		})
+		// request.addEventListener('load', () => {
+		// 	if(request.status === 200){
+		// 		console.log(request.response)
+		// 		messageBlock.textContent = message.success
+		// 	} else {
+		// 		messageBlock.textContent = message.fail
+		// 	}
+		// })
 	})
 }
+let post = {
+  method: 'POST',
+  headers: {
+      'Content-type': 'application/json'
+  },
+  body: JSON.stringify()
+}
+  fetch('server.php', post)
+  .then(response => {
+      if (response.ok){
+          return response.json()
+      }else {
+          return `Error ${response.status}`
+      };
+    });
+    
