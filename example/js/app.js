@@ -226,7 +226,7 @@ function postData (form) {
 		e.preventDefault()
 
 		const messageBlock = document.createElement('div')
-		messageBlock.textContent = message.loading
+		messageBlock.textContent = message.success
 		form.append(messageBlock)
 
 		// const request = new XMLHttpRequest()
