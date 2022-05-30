@@ -1,3 +1,4 @@
+//tabs
 const tabs = document.querySelectorAll(".tabheader__item");
 const tabsParent = document.querySelector(".tabheader__items");
 const tabContent = document.querySelectorAll(".tabcontent");
@@ -68,57 +69,49 @@ let timer = setInterval(function () {
   showSlides(slideIndex);
 }, 3000);
 
+//modal
 const modal = document.querySelector(".modal");
-const modalTrigger = document.querySelector(".btn_white");
-const modalTriggerDark = document.querySelector(".btn_dark")
-const closeModalBtn = document.querySelector(".modal__close");
+const modalTrigger = document.querySelectorAll("[data-modal]");
 
-const openModal = () => {
+modalTrigger.forEach((item) => {
+  item.addEventListener("click", openModal);
+});
+
+function openModal() {
   modal.classList.add("show");
   modal.classList.remove("hide");
   document.body.style.overflow = "hidden";
-};
 
-const closeModal = () => {
+  clearInterval(modalTimeout);
+}
+
+function closeModal() {
   modal.classList.add("hide");
   modal.classList.remove("show");
   document.body.style.overflow = "";
-};
-
-modalTrigger.addEventListener("click", openModal);
-modalTriggerDark.addEventListener("click", openModal);
+}
 
 modal.addEventListener("click", (event) => {
-  if (event.target == modal) {
+  if (
+    event.target === modal ||
+    event.target.classList.contains("modal__close")
+  ) {
     closeModal();
-    console.log(event.target);
   }
 });
 
-closeModalBtn.addEventListener("click", closeModal);
-
-// window.addEventListener("scroll", () => {
-//   let num = (window.pageYOffset)
-//   if ( window.pageYOffset > 3605) {
-//     openModal()
-//   }}
-// );
-
-modal.addEventListener('click', (event) => {
-	if (event.target === modal) {
-		closeModal()
-	}
-})
-
 function openModalScroll() {
-	const page = document.documentElement
+  const page = document.documentElement;
 
-	if (page.scrollTop + page.clientHeight >= page.scrollHeight) {
-		openModal()
+  if (page.scrollTop + page.clientHeight >= page.scrollHeight) {
+    openModal();
 
-		window.removeEventListener('scroll', openModalScroll)
-	}
+    window.removeEventListener("scroll", openModalScroll);
+  }
 }
+
+window.addEventListener("scroll", openModalScroll);
+const modalTimeout = setTimeout(openModal, 50000);
 
 const deadline = '2022-5-27'
 
@@ -138,7 +131,6 @@ function getTimeRemaining(deadline) {
 	}
 }
 
-
 function setClock(element, deadline) {
 	const elem = document.querySelector(element),
 		days = elem.querySelector('#days'),
@@ -146,47 +138,54 @@ function setClock(element, deadline) {
 		minutes = elem.querySelector('#minutes'),
 		seconds = elem.querySelector('#seconds');
 
-	setInterval(updateClock, 1000)
+	setInterval(updateClock, 1000);
 
-	updateClock()
+	updateClock();
 
 	function makeZero(num) {
 		if (num > 0 && num < 10) {
-			return `0${num}`
+			return `0${num}`;
 		} else {
-			return num
+			return num;
 		}
 	}
 
-	function updateClock() {
-		const t = getTimeRemaining(deadline);
-		days.innerHTML = makeZero(t.days);
-		hours.innerHTML = makeZero(t.hours);
-		minutes.innerHTML = makeZero(t.minutes);
-		seconds.innerHTML = makeZero(t.seconds)
-	}
+  function updateClock() {
+    const t = getTimeRemaining(deadline);
+    if (t.total < 0) {
+      days.innerHTML = 0;
+      hours.innerHTML = 0;
+      minutes.innerHTML = 0;
+      seconds.innerHTML = 0;
+    } else {
+      days.innerHTML = makeZero(t.days);
+      hours.innerHTML = makeZero(t.hours);
+      minutes.innerHTML = makeZero(t.minutes);
+      seconds.innerHTML = makeZero(t.seconds);
+    }
+  }
 }
 
 setClock('.timer', deadline)
 
 // card
-
 class Menu {
-	constructor(src, title, description, price) {
-		this.src = src
-		this.title = title
-		this.price = price
-		this.description = description
-	}
+  constructor(img, altimg, title, descr, price) {
+    this.src = img;
+    this.title = title;
+    this.price = price;
+    this.altimg = altimg;
+    this.description = descr;
+  }
 
-	render() {
-		const wrapper = document.querySelector('#cardWrapper')
-		const elem = document.createElement('div')
-		elem.classList.add('menu__item')
+  render() {
+    const wrapper = document.querySelector("#cardWrapper");
+    const elem = document.createElement("div");
+    elem.classList.add("menu__item");
 
-		elem.innerHTML = `
+    elem.innerHTML = `
 		<div class="menu__item">
-			<img src=${this.src} alt="vegy">
+			<img src=${this.src} alt=${this.altimg}>
 			<h3 class="menu__item-subtitle">${this.title}</h3>
 			<div class="menu__item-descr">${this.description}</div>
 			<div class="menu__item-divider"></div>
@@ -195,77 +194,103 @@ class Menu {
 			<div class="menu__item-total"><span>${this.price}</span> грн/день</div>
 			</div>
 		</div>
-		`
-		wrapper.append(elem)
-	}
+		`;
+    wrapper.append(elem);
+  }
 }
 
-const card1 = new Menu(
-	"img/tabs/vegy.jpg",
-	"Меню Фитнес",
-	"Меню \"Фитнес\" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!",
-	"229"
-)
-card1.render()
+const getResource = async (url) => {
+  const res = await fetch(url);
 
+  if (!res.ok) {
+    new Error(`Couldn't fetch ${url}, status: ${res.status}`);
+  }
+
+  return await res.json();
+};
+
+getResource("db.json").then((data) => {
+  data.menu.forEach(({ img, altimg, title, descr, price }) => {
+    new Menu(img, altimg, title, descr, price).render();
+  });
+});
 // form
 
 const forms = document.querySelectorAll('form')
 const message = {
-	loading: 'Идет загрузка...',
+	loading: "Loading...",
 	success: 'Спасибо, скоро свяжемся !',
 	fail: 'Что-то пошло не так'
 }
 
 forms.forEach(item => {
-	postData(item)
-})
+	bindPostData(item)
+});
 
-function postData (form) {
+const postData = async (url, data) => {
+  const res = await fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-type": "application/json",
+    },
+    body: data, 
+  });
+  return await res;
+}
+
+function bindPostData (form) {
 	form.addEventListener('submit', (e) => {
 		e.preventDefault()
 
 		const messageBlock = document.createElement('div')
-		messageBlock.textContent = message.success
-		form.append(messageBlock)
+		messageBlock.src = message.loading
+    messageBlock.style.cssText = `
+    display: block;
+    margin: 20px auto 0;
+    `;
+    form.insertAdjacentElement("afterend", messageBlock);
+    
+    const formData = new FormData(form);
+    const object = {};
 
-		// const request = new XMLHttpRequest()
-		// request.open('POST', 'server.php')
-		// request.setRequestHeader('Content-type', 'application/json')
+    formData.forEach((item, i) => {
+      object[i] = item;
+    });
 
-		// const formData = new FormData(form)
-		// const object = {}
-
-		// formData.forEach((item, i) => {
-		// 	object[i] = item
-		// })
-
-		// const json = JSON.stringify(object)
-		// request.send(json)
-
-		// request.addEventListener('load', () => {
-		// 	if(request.status === 200){
-		// 		console.log(request.response)
-		// 		messageBlock.textContent = message.success
-		// 	} else {
-		// 		messageBlock.textContent = message.fail
-		// 	}
-		// })
+    postData("server-php", JSON.stringify(object))
+    .then((data) => {
+      console.log(data);
+      showThanksModal(message.success);
+    })
+    .catch(() => {
+      showThanksModal(message.fail);
+    })
+    .finally(() => {
+      form.reset();
+      messageBlock.remove();
+    });
 	})
 }
-let post = {
-  method: 'POST',
-  headers: {
-      'Content-type': 'application/json'
-  },
-  body: JSON.stringify()
+function showThanksModal(message) {
+  openModal();
+  const prevModal = document.querySelector(".modal__dialog");
+  prevModal.classList.add("hide");
+
+  const thanksModal = document.createElement("div");
+  thanksModal.classList.add("modal__dialog");
+
+  thanksModal.innerHTML = `
+		<div class="modal__content">
+			<div class="modal__close">x</div>
+			<div class="modal__title">${message}</div>
+		</div>
+	`;
+  modal.append(thanksModal);
+
+  setTimeout(() => {
+    prevModal.classList.remove("hide");
+    closeModal();
+    thanksModal.remove();
+  }, 2000);
 }
-  fetch('server.php', post)
-  .then(response => {
-      if (response.ok){
-          return response.json()
-      }else {
-          return `Error ${response.status}`
-      };
-    });
     
