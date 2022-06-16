@@ -2,8 +2,6 @@ const idInput= document.querySelector(".idInput");
 const spanResult = document.querySelector(".spanResult");
 const btnClick = document.querySelector(".btnClick");
 
-
-
 const idReg = /^1\d{13}|2\d{13}$/;
 
 btnClick.addEventListener("click", () => {

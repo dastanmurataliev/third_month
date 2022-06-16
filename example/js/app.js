@@ -1,4 +1,4 @@
-//tabs
+// ? TABS
 const tabs = document.querySelectorAll(".tabheader__item");
 const tabsParent = document.querySelector(".tabheader__items");
 const tabContent = document.querySelectorAll(".tabcontent");
@@ -33,6 +33,8 @@ tabsParent.addEventListener("click", (event) => {
   }
 });
 
+//* SLIDER
+
 let slideIndex = 0;
 function currentSlide(n) {
   showSlides(slideIndex = n);
@@ -56,7 +58,6 @@ function showSlides(n) {
     slide.style.display = "none";
   }
   sliderSlide[slideIndex].style.display = "block";
-
 }
 
 let timer = setInterval(function () {
@@ -69,7 +70,8 @@ let timer = setInterval(function () {
   showSlides(slideIndex);
 }, 3000);
 
-//modal
+//* MODAL
+
 const modal = document.querySelector(".modal");
 const modalTrigger = document.querySelectorAll("[data-modal]");
 
@@ -113,7 +115,8 @@ function openModalScroll() {
 window.addEventListener("scroll", openModalScroll);
 const modalTimeout = setTimeout(openModal, 50000);
 
-const deadline = '2022-5-27'
+// ?DEADLINE
+const deadline = '2022-6-30'
 
 function getTimeRemaining(deadline) {
 	const t = new Date(deadline) - new Date(),
@@ -165,10 +168,10 @@ function setClock(element, deadline) {
     }
   }
 }
-
 setClock('.timer', deadline)
 
-// card
+// !CARD
+
 class Menu {
   constructor(img, altimg, title, descr, price) {
     this.src = img;
@@ -198,7 +201,7 @@ class Menu {
     wrapper.append(elem);
   }
 }
-
+ //* async & await
 const getResource = async (url) => {
   const res = await fetch(url);
 
@@ -214,8 +217,8 @@ getResource("db.json").then((data) => {
     new Menu(img, altimg, title, descr, price).render();
   });
 });
-// form
 
+//? FORM
 const forms = document.querySelectorAll('form')
 const message = {
 	loading: "Loading...",
@@ -292,5 +295,4 @@ function showThanksModal(message) {
     closeModal();
     thanksModal.remove();
   }, 2000);
-}
-    
+}    
